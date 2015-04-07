@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="resources.application" var="msg"/>
+
+<h:head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+   <title><h:outputText value="#{msg.loginTitle}" /></title>
+</h:head>
+
+<ui:composition template="/WEB-INF/templates/common-template.xhtml">
+ 	 
+	<ui:define name="navPane">
+		<ui:include src="/WEB-INF/pages/user-navpane.xhtml"/>
+	</ui:define>
+	
+	<ui:define name="upperPane">
+		<ui:include src="#{backingBean.action}"/>
+	</ui:define>
+	
+	<ui:define name="lowerPane">
+		<ui:include src="#{backingBean.resultsPane}"/>
+	</ui:define>		
+
+</ui:composition>
+
+</html>

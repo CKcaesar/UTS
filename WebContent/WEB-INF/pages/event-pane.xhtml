@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+
+<style>
+
+	.dataTable {
+		width:100%;
+		border:2px solid #999966;
+		background-color:transparent;
+	}
+	
+	.dataTableGridPane {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+		background-color:transparent;
+	}
+
+	.buttonPane {
+		width:100%;
+		height:25px;
+		text-align:right;
+		cellpadding:5;
+		cellspacing:1;	   
+	}
+		
+	.search-results-header {
+		text-align:center;
+		background-color:#999966;
+		border-bottom:1px solid #BBBBBB;
+		padding:16px;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;	
+	}
+										  
+	.searchResults {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+	}
+
+	.resultsHeader {
+		width:100%;
+		height:25px;
+		color:white;
+		vertical-align:top;
+		font-size:24px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color: #999966;
+		border:2px solid black;		
+	}	
+	
+	.results-table-odd-row {
+		color:white;
+		text-align:center;
+		background:none repeat scroll 0 0 #000000;
+		border-top:1px solid black;
+		height: 15px;
+		font-size:12px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif; 
+	}
+ 
+	.results-table-even-row {
+		color:white;
+		text-align:center;
+		background:none repeat scroll 0 0 #545454;
+		border-top:1px solid black;
+		height: 15px;
+		font-size:12px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif; 
+	}
+	
+	.c5 {
+		width:5%;
+	}		 	
+		
+	.c10 {
+		width:10%;	
+	}
+		
+	.c15 {
+		width:15%;	
+	}
+		
+	.c20 {
+		width:20%;	
+	}	
+	
+	.c30 {
+		width:30%;	
+		text-align:left;
+	}	
+	
+	
+</style>
+
+</head>
+<body>
+<f:view id="eventResultsPaneView">
+<h:form if="eventResultsPaneForm">
+
+<div >
+
+	<h:panelGrid id="resultsHeader" 
+					 columns="1" 
+					 columnClasses="searchResults" 
+					 rendered="true" >	
+		<h:column>
+			<h:panelGrid class="resultsHeader">
+				<h:outputText value="Event Log" />
+			</h:panelGrid>
+		</h:column>
+	</h:panelGrid>
+	 
+	<div style="height:500px;width:100%;overflow-x:auto;overflow-y:auto;"  >		
+	<h:panelGrid columns="1" class="dataTableGridPane" rendered="true">
+
+		<h:dataTable id="dataTable" 							  
+						 var="e"		
+						 rows="50" 				 
+						 value="#{eventManager.listOfEvents}"
+						 headerClass="search-results-header"
+						 rowClasses="results-table-odd-row ,results-table-even-row"
+						 columnClasses="c5, c5, c20, c10, c10, c10, c10, c30" >
+
+		    <h:column>
+		    	<f:facet name="header">Log</f:facet>
+		    	#{e.logId}
+		    </h:column>
+			 <h:column>
+			 	<f:facet name="header">Event Id</f:facet>
+			 	#{e.eventId}
+			 </h:column>
+		    <h:column>
+		    	<f:facet name="header">Event Time</f:facet>
+		    	#{e.eventTime}
+		    </h:column>
+			 <h:column>
+			 	<f:facet name="header">User Id</f:facet>
+			 	#{e.userId}
+			 </h:column>
+		    <h:column>
+		    	<f:facet name="header">User Name</f:facet>
+		    	#{e.username}
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">Action</f:facet>
+		    	#{e.action}
+		    </h:column>		    
+		    <h:column>
+		    	<f:facet name="header">Subject</f:facet>
+		    	#{e.subject}
+		    </h:column>
+			 <h:column>
+			 	<f:facet name="header">Description</f:facet>
+		    	#{e.description}
+			 </h:column>
+
+		</h:dataTable>
+			
+	</h:panelGrid>
+	</div>
+</div>
+
+<hr style="width:80%" />
+
+</h:form>
+</f:view>
+</body>
+</html>

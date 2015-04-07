@@ -1,0 +1,148 @@
+@CHARSET "ISO-8859-1";
+
+
+.mainContainer {
+	width:80%;
+	text-align:left; 
+	border:2px solid black;"
+	background-color:transparent; 
+}
+
+.isbnLabel {
+	width:13%;
+   height:25px;
+   text-align:left;
+	color:white;
+   font-size:18px;
+   font-weight:strong;
+   font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+}
+
+.authorLabel {
+	width:22%;
+   height:25px;
+   text-align:left;
+	color:white;
+   font-size:18px;
+   font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+}
+
+.titlesLabel {
+	width:33%;
+   height:25px;
+   text-align:left;
+	color:white;
+   font-size:18px;		
+   font-style:"Arial Verdana", Arial, Helvetica, sans-serif;    
+}
+
+.title-table {   
+	width:100%;
+	border:1px solid black;
+}
+ 
+.title-table-header {
+	text-align:left;
+	overflow: scroll;
+	background:black repeat scroll 0 0 #E5E5E5;
+	border:1px solid black;
+	padding:16px;
+   height:20px;
+}
+ 
+.title-table-odd-row {
+	text-align:left;
+	background:none repeat scroll 0 0 #FFFF66;
+	border:1px solid black;
+	height:15px;
+	text-size:12px;
+}
+ 
+.title-table-even-row {
+	text-align:left;
+	background:none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid black;
+	height: 15px;
+	text-size:12px;
+}
+
+.loan-table {   
+	width:100%;
+	border:1px solid black;
+}
+ 
+.loan-table-header {
+	background:black repeat scroll 0 0 #E5E5E5;
+	border:1px solid black;
+	padding:16px;
+   height:20px;
+}
+ 
+.loan-table-odd-row {
+	text-align:left;
+	background:none repeat scroll 0 0 #FFFF66;
+	border:1px solid black;
+	height:15px;
+	text-size:12px;
+}
+ 
+.loan-table-even-row {
+	text-align:left;
+	background:none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid black;
+	height: 15px;
+	text-size:12px;
+}
+
+.header1 { min-width:  4%; height:20px; text-align:Left; background-color:black;color:white; white-space:nowrap; display:inline;}
+.header2 { min-width:  8%; height:20px; text-align:left; background-color:black;color:white; white-space:nowrap; display:inline; }
+.header3 { min-width: 20%; height:20px; text-align:left; background-color:black;color:white; white-space:nowrap; display:inline; }
+.header4 { min-width: 38%; height:20px; text-align:left; background-color:black;color:white; white-space:nowrap; display:inline; }
+
+.onHand {
+  		width: 4%;
+}
+
+.isbnColumn {
+  		-width: 18%;
+  		text-align:left; 
+}
+
+.authorColumn {
+  		width: 28%;
+  		text-align:left;
+  		/* white-space:nowrap; */  
+}
+
+.titleColumn {
+  		width: 50%;
+  		text-align:left; 
+  		/* white-space:nowrap; */ 
+}
+
+.checkBoxColumn {
+  		width: 4%;
+}
+
+.message {
+ 	color:white;
+ 	font-size:18px;
+ 	text-align:left;
+ 	font-weight:strong;
+ 	background-color:red;
+ }
+
+.accountInformation {
+	width:80%;
+	color:white;
+	border:1 solid black;
+	font-size:18px;
+	font-weight:strong;
+	font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+	background-color:blue;
+} 
+
+body {
+	display: box;
+  	margin:0 auto;
+}

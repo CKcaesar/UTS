@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+
+<style>
+
+	.dataTable {
+		width:100%;
+		border:2px solid #999966;
+		background-color:transparent;
+	}
+	
+	.dataTableGridPane {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+		background-color:transparent;
+	}
+
+	.buttonPane {
+		width:100%;
+		height:25px;
+		text-align:right;
+		cellpadding:5;
+		cellspacing:1;	   
+	}
+		
+	.search-results-header {
+		text-align:center;
+		background-color:#999966;
+		border-bottom:1px solid #BBBBBB;
+		padding:16px;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;	
+	}
+										  
+	.searchResults {
+		width:100%;
+		vertical-align:center;
+	}
+
+	.resultsHeader {
+		width:100%;
+		height:25px;
+		color:white;
+		vertical-align:top;
+		font-size:24px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;		
+	}	
+	
+	.familyName {
+			width:18%;
+			color:white;
+			font-size:14px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:black; 
+		}		 	
+		
+	.givenName {
+		width:18%;
+		color:white;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}		 	
+		
+	.checkBox {
+		width:5%;
+		color:black;
+		text-align:center;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+	
+</style>
+
+</head>
+<body>
+<f:view id="authorResultsPaneView">
+<h:form if="authorResultsPaneForm">
+
+<div >
+
+	<h:panelGrid id="resultsHeader" 
+					 columns="2" 
+					 styleClass="resultsHeader"
+					 columnClasses="searchResults" 
+					 rendered="#{authorController.render}" >
+		
+		<h:column style="width:50%;text-align:left;">
+			<h:panelGrid><h:outputText value="Search Results" /></h:panelGrid>
+		</h:column>
+		<h:column style="width:50%;text-align:right;">
+			<h:commandButton id="closePane" 
+	  					  		  value="Close"
+	  					  		  style="width:125px;"		  					  		  
+	  					  		  actionListener="#{authorController.closePane}" />			
+			<h:commandButton id="submit" 
+	  					  		  value="Delete Items"
+	  					  		  style="width:125px;"		  					  		  
+	  					  		  actionListener="#{authorController.delete}" 
+	  					  		  update="messages" />		  			 	  
+		</h:column>
+		
+	</h:panelGrid>
+		 
+	<div style="height:200px;width:100%;overflow-x:auto;overflow-y:auto;"  >		
+	<h:panelGrid columns="1" class="dataTableGridPane" rendered="#{authorController.render}">
+
+		<h:dataTable id="dataTable" 							  
+						 var="a"		
+						 rows="50" 				 
+						 value="#{authorController.listOfObjects}"
+						 headerClass="search-results-header"
+						 columnClasses="familyName, givenName, checkBox">
+
+		    <h:column>
+		    	<f:facet name="header">Family Name</f:facet>
+		    	#{a.familyName}
+		    </h:column>
+			 <h:column>
+			 	<f:facet name="header">Given Name</f:facet>
+			 	#{a.givenName}
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">Delete</f:facet>
+			 	<h:selectBooleanCheckbox id="checked" value="#{authorController.selectedObjects[a.authorId]}" />
+			 </h:column>
+			 
+		</h:dataTable>
+			
+	</h:panelGrid>
+	</div>
+</div>
+
+</h:form>
+</f:view>
+</body>
+</html>

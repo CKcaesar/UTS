@@ -1,0 +1,80 @@
+@CHARSET "ISO-8859-1";
+
+.l1 {
+	text-align:left;
+	color:white;
+   font-weight:bold;
+   font-size:18px;
+   height:25px;
+}
+
+.l2 {
+	text-align:left;
+	color:white;
+   font-weight:bold;
+   font-size:18px;
+   height:25px;
+}
+
+.l3 {
+	text-align:left;
+	color:white;
+   font-weight:bold;
+   font-size:18px;		
+   height:25px;   
+}
+
+.title-table {   
+	width:100%;
+	border:2px solid black;
+}
+ 
+.title-table-header {
+	text-align:left;
+	overflow: scroll;
+	background:black repeat scroll 0 0 #E5E5E5;
+	border-bottom:1px solid black;
+	padding:16px;
+   height:20px;
+}
+ 
+.title-table-odd-row {
+	text-align:left;
+	background:none repeat scroll 0 0 #FFFF66;
+	border-top:1px solid black;
+	height: 15px;
+	text-size:12px;
+}
+ 
+.title-table-even-row {
+	text-align:left;
+	background:none repeat scroll 0 0 #FFFFFF;
+	border-top:1px solid black;
+	height: 15px;
+	text-size:12px;
+}
+
+.header1 { width: 15%; text-align:left; background-color:black;color:white; }
+.header2 { width: 25%; text-align:left; background-color:black;color:white; white-space:nowrap; }
+.header3 { width: 55%; text-align:left; background-color:red;color:white; white-space:nowrap; }
+.header4 { width:  5%; text-align:left; background-color:black;color:white; white-space:nowrap; }
+
+.isbnColumn {
+  		width: 250px;
+  		text-align:left; 
+}
+
+.authorColumn {
+  		width: 100px;
+  		text-align:left; 
+}
+
+.titleColumn {
+  		width: 400px;
+  		text-align:left; 
+}
+
+.checkBoxColumn {
+  		width: 5%;
+  		text-align:left; 
+}

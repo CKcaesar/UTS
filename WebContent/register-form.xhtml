@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+
+<style>
+
+	.table {		
+		min-width:100%;
+		min-height:100%;
+		cellpadding:5;
+		cellspacing:1;
+	}
+
+	#main {
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		position:absolute;
+		text-align:center;
+		vertical-align:middle;
+	}
+	
+	.c1L {
+		width:130px;
+		text-align:left;"
+	    font-size:18px;
+		font-weight:strong;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+	}
+	
+	.c1R {
+		width:130px;
+		text-align:right;"
+	    font-size:18px;
+		font-weight:strong;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+	}
+	.errorMessagePane {
+			width:100%;
+			color:red;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid red;
+			background-color:black;
+		}
+		
+		.successMessagePane {
+			width:100%;
+			color:green;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid green;
+			background-color:black;
+		}
+	
+</style>
+</head>
+
+<body>
+<f:view>
+
+<h:form rendered="true" id="loginForm">
+	
+<div id="main">
+
+	<table class="table">
+		<tr>
+			<td style="width:27%;background-color:white" />
+			<td style="text-align:center;
+					   vertical-align:middle;
+					   line-height:25px;
+			 		   background-size: 100% 100%;
+					   background-image:url('http://127.0.0.1:8080/WebApp4/images/sandy.jpg');
+					   background-repeat:no-repeat;
+					   background-color:transparent;">
+				
+         	<h1>Welcome to the University Tracking System register page</h1>
+         	<h2>Please fill the form</h2>
+    <h:panelGrid id="errorMessagePane" columns="1" class="errorMessagePane" rendered="#{messages.errorRender}">
+		<ui:repeat value="#{messages.errorMessages}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+	
+	<h:panelGrid id="successMessagePane" columns="1" class="successMessagePane" rendered="#{messages.confirmRender}">
+		<ui:repeat value="#{messages.confirmations}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+	<h:panelGrid id="feedbackMessagePane" columns="1" class="feedbackMessagePane" rendered="#{messages.feedbackRender}">
+		<ui:repeat value="#{messages.feedbacks}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+ 
+      		<p style="min-height:150px;background-color:transparent;" />
+      		
+ 				<div style="text-align:center">
+ 				
+					<table style="width:100%;border-collapse:collapse;">
+
+	   				<tr>
+	   				
+	   					<td rowspan="4" style="width:25%;">&nbsp;</td>
+		   				<td class="c1L">
+		           			<h:outputText value="First Name"  />
+		            	</td>
+		            	<td style="width:130px;text-align:right">
+		            		<h:inputText id="firstname" style="text-align:left;width:130px" value="#{userController.bean.firstname}" />
+		            	</td>
+		            	<td rowspan="4" style="width:26%;">&nbsp;</td>	            	
+	            	
+	            	</tr>
+	            	
+	            	
+						            	
+	            	<tr>	            		
+	            		<td class="c1L">
+	            			<h:outputText value="Last Name" />
+	            		</td>
+	            		<td style="width:130px;text-align:right">
+	            			<h:inputText id="lastname" style="text-align:left;width:130px" value="#{userController.bean.lastname}" />
+	            		</td>
+	            	</tr>
+	            	<tr>	            		
+	            		<td class="c1L">
+	            			<h:outputText value="Birthdate" />
+	            		</td>
+	            		<td style="width:130px;text-align:right">
+	            			<h:inputText id="birthdate" style="text-align:left;width:130px" value="#{userController.bean.birthdate}" />
+	            		</td>
+	            	</tr>
+	            	<tr>	            		
+	            		<td class="c1L">
+	            			<h:outputText value="School" />
+	            		</td>
+	            		<td style="width:130px;text-align:right">
+	            			<h:inputText id="school" style="text-align:left;width:130px" value="#{userController.bean.school}" />
+	            		</td>
+	            	</tr>
+
+				
+	            	<tr>	       
+	            	   <h:message for="confirmPassword" style="color: red;" />  		
+	            		<td colspan="2" style="width:560px;text-align:right;vertical-align:middle;">
+	         				<h:commandButton id="confirmRegister" value="Submit" style="width:130px;" action="#{userController.create}" />
+	         				<h:commandButton id="backtomainpage" value="Mainpage" style="width:130px;" action="#{backingBean.logOut}" />         				   		
+	            		</td>
+					</tr>
+	            	
+	            </table>
+	            		
+            </div>
+                            
+			</td>
+			
+			<td style="width:27%;background-color:transparent" />
+		</tr>
+		
+	</table>
+ </div>
+ 
+</h:form>
+</f:view>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html">		
+
+<h:head >	
+  	
+  	<style>
+
+	.dataTable {
+		width:100%;
+		border:2px solid #999966;
+		background-color:transparent;
+	}
+	
+	.dataTableGridPane {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+		background-color:transparent;
+	}
+
+	.buttonPane {
+		width:100%;
+		height:25px;
+		text-align:right;
+		cellpadding:5;
+		cellspacing:1;	   
+	}
+		
+	.search-results-header {
+		text-align:center;
+		background-color:#999966;
+		border-bottom:1px solid #BBBBBB;
+		padding:10px;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;	
+	}
+										  
+	.searchResults {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+	}
+
+	.resultsHeader {
+		width:100%;
+		height:25px;
+		color:white;
+		vertical-align:top;
+		font-size:24px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;		
+	}	
+	
+	
+	.isbn {
+		width:15%;
+		color:white;
+		font-size:12px;
+		font-weight:bold;
+		text-align:center;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}		 	
+	
+	.itemNumber {
+		width:5%;
+		color:white;
+		text-align:center;
+		font-size:12px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}		 	
+	
+	.author {
+		width:35%;
+		color:white;
+		font-size:12px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+	
+	.title {
+		width:50%;
+		color:white;
+		font-size:12px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+
+	.checkBox {
+		width:5%;
+		color:black;
+		text-align:center;
+		font-size:12px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+	
+  	</style>
+</h:head>
+
+<body>
+<center>
+
+<f:subview id="deleteTitlesView">
+<h:form id="deleteTitlesForm">
+
+	<h:panelGrid id="resultsHeader" 
+					 columns="2" 
+					 styleClass="resultsHeader"
+					 columnClasses="searchResults" 
+					 rendered="#{itemController.render}" >
+		
+		<h:column style="width:50%;text-align:left;">
+			<h:panelGrid><h:outputText value="Search Results" /></h:panelGrid>
+		</h:column>
+		<h:column style="width:50%;text-align:right;">
+			<h:commandButton id="closePane" 
+	  					  		  value="Close"
+	  					  		  style="width:125px;"		  					  		  
+	  					  		  actionListener="#{itemController.closePane}" />			
+			<h:commandButton id="submit" 
+	  					  		  value="Delete Items"
+	  					  		  style="width:125px;"		  					  		  
+	  					  		  actionListener="#{itemController.delete}" 
+	  					  		  update="messages" />		  			 	  
+		</h:column>
+		
+	</h:panelGrid>
+	 
+	<div style="height:200px;width:100%;overflow-x:auto;overflow-y:auto;"  >		
+	<h:panelGrid columns="1" class="dataTableGridPane" rendered="#{itemController.render}">
+  		 
+		<h:dataTable id="dataTable" 							  
+						 var="i"		
+						 rows="50" 				 
+						 value="#{itemController.listOfObjects}"
+						 headerClass="search-results-header"
+						 columnClasses="isbn, itemNumber, title, author, checkBox">
+
+			 <h:column>
+			 	<f:facet name="header">ISBN</f:facet>
+			 	#{i.isbn}
+			 </h:column>
+			 
+			 <h:column>
+			 	<f:facet name="header">#</f:facet>
+			 	#{i.itemNumber}
+			 </h:column>
+			 	
+			 <h:column>
+			 	<f:facet name="header">Title</f:facet>
+			 	#{i.title}
+			 </h:column>
+			 
+			 <h:column>
+			 	<f:facet name="header">Author</f:facet>
+			 	#{i.author}
+			 </h:column>					    
+		    
+			 <h:column>
+			 	<f:facet name="header" />
+			 	<h:selectBooleanCheckbox id="checked" value="#{itemController.selectedObjects[i.id]}" />
+			 </h:column>
+			 
+		</h:dataTable>
+			
+	</h:panelGrid>
+	</div>
+		
+</h:form>
+</f:subview>
+
+</center>
+</body>
+</html>

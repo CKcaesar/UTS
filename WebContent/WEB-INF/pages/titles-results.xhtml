@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html">		
+
+<h:head >	
+  	<h:outputStylesheet library="css" name="titles.css"  />
+  	
+<style>
+
+	.dataTable {
+		width:100%;
+		border:2px solid #999966;
+		background-color:transparent;
+	}
+	
+	.dataTableGridPane {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+		background-color:transparent;
+	}
+
+	.buttonPane {
+		width:100%;
+		height:25px;
+		text-align:right;
+		cellpadding:5;
+		cellspacing:1;	   
+	}
+		
+	.search-results-header {
+		text-align:center;
+		background-color:#999966;
+		border-bottom:1px solid #BBBBBB;
+		padding:10px;
+		font-size:18px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;	
+	}
+										  
+	.searchResults {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+	}
+
+	.resultsHeader {
+		width:100%;
+		height:25px;
+		color:white;
+		vertical-align:top;
+		font-size:24px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;		
+	}	
+	
+	
+	.isbn {
+		width:75px;
+		color:white;
+		font-size:14px;
+		font-weight:bold;
+		text-align:center;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}		 	
+	
+	.onHand {
+		width:3%;
+		color:white;
+		text-align:center;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}		 	
+	
+	.author {
+		width:30%;
+		color:white;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+	
+	.title {
+		width:40%;
+		color:white;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+
+	.publisher {
+		width:24%;
+		color:white;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+
+	.checkBox {
+		width:3%;
+		color:black;
+		text-align:center;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+	
+ </style>
+  	
+</h:head>
+
+<body>
+<center>
+
+<f:subview id="deleteTitlesView">
+<h:form id="deleteTitlesForm">
+
+	<h:panelGrid id="resultsHeader" 
+				 columns="2" 
+				 styleClass="resultsHeader"
+				 columnClasses="searchResults" 
+				 rendered="#{titleController.render}" >
+		
+		<h:column>
+			<h:panelGrid><h:outputText value="Search Results" /></h:panelGrid>
+		</h:column>
+		
+		<h:column>
+			<h:panelGrid columns="3" class="buttonPane">
+				<h:commandButton id="closePane" 
+		  					  		  value="Close"
+		  					  		  style="width:125px;"		  					  		  
+		  					  		  actionListener="#{titleController.closePane}" />			
+		 		<h:commandButton id="createItem" 
+		  					  		  value="Create item"
+		  					  		  style="width:125px;"		  					  		  
+		  					  		  actionListener="#{titleController.createItems}" />	
+				<h:commandButton id="submit" 
+		  					  		  value="Delete Title"
+		  					  		  style="width:125px;"		  					  		  
+		  					  		  actionListener="#{titleController.delete}" 
+		  					  		  update="messages" />		  			 	  
+	  		</h:panelGrid>
+		</h:column>
+		
+	</h:panelGrid>
+	 
+	<div style="height:200px;width:100%;overflow-x:auto;overflow-y:auto;"  >
+			
+	<h:panelGrid columns="1" class="dataTableGridPane" rendered="#{titleController.render}">
+  		 
+		<h:dataTable id="dataTable" 							  
+						 var="t"		
+						 rows="50" 				 
+						 value="#{titleController.listOfObjects}"
+						 headerClass="search-results-header"
+						 columnClasses="isbn, onHand, title, author, publisher, checkBox">
+
+			 <h:column>
+			 	<f:facet name="header">ISBN</f:facet>
+			 	#{t.isbn}
+			 </h:column>
+			 
+			 <h:column>
+			 	<f:facet name="header">#</f:facet>
+			 	#{t.onHand}
+			 </h:column>
+			 	
+			 <h:column>
+			 	<f:facet name="header">Title</f:facet>
+			 	#{t.title}
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">Author</f:facet>
+			 	#{t.author}
+			 </h:column>					    
+		    
+		    <h:column>
+		    	<f:facet name="header">Publisher</f:facet>
+		    	#{t.publisher}
+		    </h:column>
+			 
+			 <h:column>
+			 	<f:facet name="header" />
+			 	<h:selectBooleanCheckbox id="checked" value="#{titleController.selectedObjects[t.isbn]}" />
+			 </h:column>
+			 
+		</h:dataTable>
+			
+	</h:panelGrid>
+	</div>
+		
+</h:form>
+</f:subview>
+
+</center>
+</body>
+</html>

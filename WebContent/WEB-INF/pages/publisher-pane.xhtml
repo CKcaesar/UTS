@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+
+<style>
+
+	.parentPane {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+		cellpadding:5;
+		cellspacing:1;
+	}
+	
+	.publisherPane {
+		width:100%;
+		height:25px;
+		color:black;
+		text-align:left;
+		vertical-align:top;
+		font-size:16px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:#999966;
+		opacity:0.6;
+	}
+
+	.publisherPane:hover {
+		width:100%;
+		height:25px;
+		color:black;
+		text-align:left;
+		vertical-align:top;
+		font-size:16px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:#999966;
+		opacity:1.0;
+	}
+	
+	.buttonPane {
+		width:100%;
+		height:25px;
+		text-align:right;
+		cellpadding:5;
+		cellspacing:1;	   
+	}
+	
+	.name {
+		width:100%;
+	}
+	
+	.errorMessagePane {
+		width:100%;
+		color:red;
+		height:25px;
+		font-size:16px;
+		text-align:center;
+		border:2px solid red;
+		background-color:black;
+	}
+	
+	.successMessagePane {
+		width:100%;
+		color:green;
+		height:25px;
+		font-size:16px;
+		text-align:center;
+		border:2px solid green;
+		background-color:black;
+	}
+	
+	.resultsHeader {
+		width:100%;
+		height:25px;
+		color:white;
+		vertical-align:top;
+		font-size:24px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color: #999966;
+		border:2px solid black;		
+	}
+	
+		
+</style>
+
+</head>
+<body>
+<f:view id="maintainPublisherView">
+<h:form id="maintainPublisherForm">
+
+	<h:panelGrid id="resultsHeader" 
+					 columns="1" 
+					 columnClasses="searchResults" 
+					 rendered="true" >	
+		<h:column>
+			<h:panelGrid class="resultsHeader">
+				<h:outputText value="Maintain Publishers" />
+			</h:panelGrid>
+		</h:column>
+	</h:panelGrid>
+
+	<h:panelGrid id="messagePane" columns="1" class="errorMessagePane" rendered="#{messages.errorRender}">
+		<ui:repeat value="#{messages.errorMessages}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+	
+	<h:panelGrid id="successMessagePane" columns="1" class="successMessagePane" rendered="#{messages.confirmRender}">
+		<ui:repeat value="#{messages.confirmations}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+
+	<h:panelGrid id="parentPane" columns="1" class="parentPane" rendered="true">
+		
+		<h:panelGrid id="G1" columns="1" class="publisherPane" rendered="true">	
+		
+			<h:column id="publisherName" style="width:100%" >
+				<h:outputText value="Publisher Name" />
+			</h:column>
+			
+			<h:column id="cPublisherName">
+				<h:inputText id="Publisher" style="width:98%" value="#{publisherController.bean.name}"  validator="#{messages.validatePublisher}" />	
+			</h:column>
+	
+		</h:panelGrid>
+		
+		<h:panelGrid  id="G2" columns="1" styleClass="buttonPane">								  
+	
+			<h:column >
+			   <h:commandButton id="findPubliser" 
+		    					  	  value="Search"
+		    					  	  style="width:125px" 		     					  
+		    					     action="#{publisherController.submit}" />
+				<h:commandButton id="createPublisher" 
+					     			  value="Create Publisher"
+					     			  style="width:125px" 		     					  
+					     			  action="#{publisherController.create}" />
+			</h:column>
+		
+		</h:panelGrid>
+	
+	</h:panelGrid>
+
+</h:form>
+</f:view>
+</body>
+</html>

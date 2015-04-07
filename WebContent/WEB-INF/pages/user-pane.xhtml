@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+		
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+
+	<style>
+	
+		.parentPane {
+			width:100%;
+			text-align:left;
+			vertical-align:top;
+			cellpadding:5;
+			cellspacing:1;
+		}
+		
+		.userPane {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:0.6;
+			border:2px solid black;
+		}
+	
+		.userPane:hover {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:1.0;
+			border:2px solid gray;
+		}
+		
+		.emailPane {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:0.6;
+			
+			border:2px solid pink;
+		}
+	
+		.emailPane:hover {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:1.0;
+			
+					border:2px solid purple;
+		}
+		
+		.errorMessagePane {
+			width:100%;
+			color:red;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid red;
+			background-color:black;
+		}
+		
+		.successMessagePane {
+			width:100%;
+			color:green;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid green;
+			background-color:black;
+		}
+		
+		.resultsHeader {
+			width:100%;
+			height:25px;
+			color:white;
+			vertical-align:top;
+			font-size:24px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color: #999966;
+			border:2px solid black;		
+		}	
+		
+		.buttonPane {
+			width:100%;
+			height:25px;
+			text-align:right;
+			cellpadding:5;
+			cellspacing:1;	   
+		}
+		
+		.radioButtons {
+			width:25%;
+			text-align:right;
+			vertical-align:top; 
+		}
+		
+		.familyName {
+			width:25%;
+		}
+		
+		.givenName {
+			width:25%;
+		}
+		
+		.middleInitial {
+			width:25%;
+		}
+			
+		.email {
+			min-width:25%;		
+		}
+		
+		.username {
+			min-width:25%;		
+		}
+		
+		.password {
+			min-width:25%;		
+		}
+		
+		.inFamilyName {
+			width:95%;
+			color:black;		
+			font-size:14px;		
+		}
+	
+		.inGivenName {
+			width:95%;
+			color:black;		
+			font-size:14px;
+		}
+	
+		.inMiddleInitial {
+			width:10%;	
+			color:black;		
+			font-size:14px;		
+		}
+				
+		.inEmail {
+			width:95%;
+			color:black;		
+			font-size:14px;	
+		}
+		
+		.inUsername {
+			width:95%;
+			color:black;		
+			font-size:14px;	
+		}
+		
+		.inPassword {
+			width:95%;
+			color:black;		
+			font-size:14px;	
+		}
+				
+		.role {
+			text-align:right;
+		}
+			
+		.c25L {
+			width:25%;
+			text-align:left;
+		}
+		
+	</style>
+
+</head>
+<body>
+
+<f:view id="maintainUserView">
+<h:form id="maintainUserForm">
+
+	<h:panelGrid id="resultsHeader" 
+					 columns="1" 
+					 columnClasses="searchResults" 
+					 rendered="true" >	
+		<h:column>
+			<h:panelGrid class="resultsHeader">
+				<h:outputText value="Maintain Terms" />
+			</h:panelGrid>
+		</h:column>
+	</h:panelGrid>
+
+	<h:panelGrid id="messagePane" columns="1" class="errorMessagePane" rendered="#{messages.errorRender}">
+		<ui:repeat value="#{messages.errorMessages}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+	
+	<h:panelGrid id="successMessagePane" columns="1" class="successMessagePane" rendered="#{messages.confirmRender}">
+		<ui:repeat value="#{messages.confirmations}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+		
+	<h:panelGrid id="parentPane" columns="1" class="parentPane" rendered="true">
+		
+		<h:panelGrid id="G1" columns="4" class="userPane" rendered="true" >	
+		
+			<h:column id="familyname" class="familyName">
+				<h:outputText value="Family Name" />
+			</h:column>
+			
+			<h:column id="givenname" class="givenName">
+				<h:outputText value="Given Name" />
+			</h:column>
+		
+			<h:column id="middleinitial" class="middleInitial">
+				<h:outputText value="Middle Initial" />
+			</h:column>
+		
+			<h:column>
+			</h:column>
+			
+			<h:column id="cFamilyName">
+				<h:inputText id="Family-Name" 
+				 			 class="inFamilyName" 
+				             value="#{userController.bean.familyName}" 
+				             validator="#{messages.validateName}">
+				</h:inputText>	
+			</h:column>
+						
+			<h:column id="cGivenname">
+				<h:inputText id="Given-Name"
+				 			 class="inGivenName" 
+							 value="#{userController.bean.givenName}" 
+							 validator="#{messages.validateName}"/>	
+			</h:column>
+			
+			<h:column id="cMiddleinitial">
+				<h:inputText id="Middle-Initial"
+				 			 class="inMiddleInitial"
+							 value="#{userController.bean.middleInitial}" 
+							 validator="#{messages.validateMiddleInitial}" />	
+			</h:column>
+	
+			<h:column class="radioButtons">
+				<h:selectOneRadio value="#{userController.bean.roleId}" required="true" requiredMessage="You must select a role">
+	   			<f:selectItem itemValue="100" itemLabel="Librarian" />
+	   			<f:selectItem itemValue="300" itemLabel="Member" selected="true"/>	   			
+				</h:selectOneRadio>
+			</h:column>
+				
+			<h:column id="email" class="email">
+				<h:outputText value="Email Address" />
+			</h:column>
+			
+			<h:column>
+				<h:outputText value="User Name" class="username"/>
+			</h:column>
+	
+			<h:column>
+				<h:outputText value="Password" class="password"/>
+			</h:column>
+			
+			<h:column>
+				<ui:param name="colspan" value="4" />
+			</h:column>
+			
+			<h:column  id="inEmail">
+				<h:inputText  id="Email-Address" class="inEmail" value="#{userController.bean.email}" validator="#{messages.validateEmail}"/>	
+			</h:column>
+		
+			<h:column  id="inUserName">
+				<h:inputText id="User-Name" class="inUsername" value="#{userController.bean.userName}" validator="#{messages.validateUsername}"/>	
+			</h:column>
+			
+			<h:column  id="inPassword" >
+				<h:inputSecret id="Password" class="inPassword" value="#{userController.bean.password}" validator="#{messages.validatePassword}"/>	
+			</h:column>
+
+			<h:column>
+				<ui:param name="colspan" value="4" />
+			</h:column>
+			
+		</h:panelGrid>
+	
+		<h:panelGrid  id="G3" columns="4" styleClass="buttonPane">								  
+		
+			<h:column>
+				<ui:param name="colspan" value="3" />
+			</h:column>
+		
+			<h:column >
+			   <h:commandButton id="clearUser" 
+		    					value="Clear"
+		    					style="width:125px" 					  
+		    					action="#{userController.clear}" />			
+			   <h:commandButton id="findUser" 
+		    					value="Search"
+		    					style="width:125px"     					  
+		    					action="#{userController.submit}" />
+			   <h:commandButton id="createUser" 
+				    			value="Create User"
+					     	    style="width:125px"    					  
+					     	    action="#{userController.create}" />
+			</h:column>
+		
+		</h:panelGrid>
+	
+	</h:panelGrid>
+
+</h:form>
+</f:view>
+</body>
+</html>

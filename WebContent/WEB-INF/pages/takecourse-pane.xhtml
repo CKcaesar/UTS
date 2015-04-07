@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+		
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+
+	<style>
+	
+		.parentPane {
+			width:100%;
+			text-align:left;
+			vertical-align:top;
+			cellpadding:5;
+			cellspacing:1;
+		}
+		
+		.userPane {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:0.6;
+			border:2px solid black;
+		}
+	
+		.userPane:hover {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:1.0;
+			border:2px solid gray;
+		}
+		
+		.emailPane {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:0.6;
+			
+			border:2px solid pink;
+		}
+	
+		.emailPane:hover {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:1.0;
+			
+					border:2px solid purple;
+		}
+		
+		.errorMessagePane {
+			width:100%;
+			color:red;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid red;
+			background-color:black;
+		}
+		
+		.successMessagePane {
+			width:100%;
+			color:green;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid green;
+			background-color:black;
+		}
+		
+		.resultsHeader {
+			width:100%;
+			height:25px;
+			color:white;
+			vertical-align:top;
+			font-size:24px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color: #999966;
+			border:2px solid black;		
+		}	
+		
+		.buttonPane {
+			width:100%;
+			height:25px;
+			text-align:right;
+			cellpadding:5;
+			cellspacing:1;	   
+		}
+		
+		.radioButtons {
+			width:25%;
+			text-align:right;
+			vertical-align:top; 
+		}
+		
+		.familyName {
+			width:16%;
+		}
+		
+		.givenName {
+			width:25%;
+		}
+		
+		.middleInitial {
+			width:25%;
+		}
+			
+		.email {
+			min-width:25%;		
+		}
+		
+		.username {
+			min-width:25%;		
+		}
+		
+		.password {
+			min-width:25%;		
+		}
+		
+		.inFamilyName {
+			width:95%;
+			color:black;		
+			font-size:14px;		
+		}
+	
+		.inGivenName {
+			width:95%;
+			color:black;		
+			font-size:14px;
+		}
+	
+		.inMiddleInitial {
+			width:10%;	
+			color:black;		
+			font-size:14px;		
+		}
+				
+		.inEmail {
+			width:95%;
+			color:black;		
+			font-size:14px;	
+		}
+		
+		.inUsername {
+			width:95%;
+			color:black;		
+			font-size:14px;	
+		}
+		
+		.inPassword {
+			width:95%;
+			color:black;		
+			font-size:14px;	
+		}
+				
+		.role {
+			text-align:right;
+		}
+			
+		.c25L {
+			width:25%;
+			text-align:left;
+		}
+		
+	</style>
+
+</head>
+<body>
+
+<f:view id="takeCourse">
+<h:form id="takeCourseForm">
+
+	<h:panelGrid id="resultsHeader" 
+					 columns="1" 
+					 columnClasses="searchResults" 
+					 rendered="true" >	
+		<h:column>
+			<h:panelGrid class="resultsHeader">
+				<h:outputText value="Search, Take and Drop Courses" />
+			</h:panelGrid>
+		</h:column>
+	</h:panelGrid>
+
+	<h:panelGrid id="messagePane" columns="1" class="errorMessagePane" rendered="#{messages.errorRender}">
+		<ui:repeat value="#{messages.errorMessages}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+	
+	<h:panelGrid id="successMessagePane" columns="1" class="successMessagePane" rendered="#{messages.confirmRender}">
+		<ui:repeat value="#{messages.confirmations}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+		
+	<h:panelGrid id="parentPane" columns="1" class="parentPane" rendered="true">
+		<h:panelGrid id="G1" columns="3" class="userPane" rendered="true" >
+			<h:column id="termname" class="familyName">
+				<h:outputText value="Select Term" style="width:125px "/>
+			</h:column>
+			<h:column id="choosetermname" class="familyName">
+				<h:selectOneMenu style="width:125px" value="#{takeCourseController.bean1.termName}">
+					<f:selectItems value="#{cacheManager.listOfTerms}" var="t" itemLabel="#{t.value}" itemValue="#{t.key}"/>
+				</h:selectOneMenu>
+			</h:column>
+			<h:commandButton id="showAll" 
+		    					value="Submit"
+		    					style="width:125px" 					  
+		    					action="#{takeCourseController.showCourse}" />
+		</h:panelGrid>
+		<h:panelGrid class="dataTableGridPane" rendered="true">
+		<h:dataTable id="dataTable1" 							  
+						 var="c"		
+						 rows="50" 							 
+						 value="#{takeCourseController.listOfObjects}"
+						 headerClass="search-results-header"
+						 columnClasses="familyName,familyName,familyName,familyName,familyName,familyName,familyName">
+
+		    <h:column>
+		    	<f:facet name="header" >Course Code</f:facet>
+		    	#{c.courseCode}
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header" >Course Name</f:facet>
+		    	#{c.courseName}
+		    </h:column>
+			 <h:column>
+			 	<f:facet name="header">Meeting Times</f:facet>
+			 	#{c.meetingTimes}
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">Time</f:facet>
+			 	#{c.time}
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">Location</f:facet>
+			 	#{c.location}
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">Add</f:facet>
+			 	<h:selectBooleanCheckbox id="checked" value="#{takeCourseController.selectedObjects[c.courseCode]}" />
+			 </h:column>
+		</h:dataTable>
+	
+	<h:panelGrid class="dataTableGridPane" rendered="true">	
+		<h:panelGrid  id="G3" columns="4" styleClass="buttonPane">								  		
+			<h:column >
+			   <h:commandButton id="addcourse" 
+		    					value="Add Course"
+		    					style="width:125px" 					  
+		    					action="#{takeCourseController.addCourse}" />			
+			</h:column>		
+		</h:panelGrid>	
+	</h:panelGrid>
+	</h:panelGrid>
+	<h:panelGrid>
+		<h:dataTable id="dataTable2" 							  
+						 var="stuc"		
+						 rows="50" 							 
+						 value="#{takeCourseController.myListOfObjects}"
+						 headerClass="search-results-header"
+						 columnClasses="familyName,familyName" style="width: 223px; ">
+		<h:column>
+		    	<f:facet name="header">Course Code</f:facet>
+		    	#{stuc.course}
+		</h:column>
+		<h:column>
+			 	<f:facet name="header">Drop</f:facet>
+			 	<h:selectBooleanCheckbox id="checked" value="#{takeCourseController.mySelectedObjects[stuc.course]}" />
+			 </h:column>
+		</h:dataTable>
+		<h:commandButton id="dropcourse" value="Drop Course" style="width:125px" action="#{takeCourseController.dropCourse}" />
+		
+	</h:panelGrid>
+	</h:panelGrid>
+</h:form>
+</f:view>
+</body>
+</html>

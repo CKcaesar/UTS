@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+
+<style>
+
+	.dataTable {
+		width:100%;
+		border:2px solid #999966;
+		background-color:transparent;
+	}
+	
+	.dataTableGridPane {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+		background-color:transparent;
+	}
+	
+	.search-results-header {
+		text-align:center;
+		background-color:#999966;
+		border-bottom:1px solid #BBBBBB;
+		padding:16px;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;	
+	}
+										  
+	.searchResults {
+		width:100%;
+		text-align:left;
+		vertical-align:top;
+	}
+
+	.buttonPane {
+		width:100%;
+		text-align:right;
+		vertical-align:top;
+	}
+	
+	.usersHeader {
+		width:100%;
+		height:25px;
+		color:white;
+		vertical-align:top;
+		font-size:24px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;		
+	}
+
+	.userName {
+			width:15%;
+			color:white;
+			font-size:14px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:black; 
+		}		 	
+		
+	.familyName {
+			width:18%;
+			color:white;
+			font-size:14px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:black; 
+		}		 	
+		
+	.givenName {
+		width:18%;
+		color:white;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}		 	
+		
+	.middleInitial {
+		width:5%;
+		color:white;
+		text-align:center;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+		
+	.role {
+		width:14%;
+		color:white;
+		text-align:left;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+
+	.email {
+		width:25%;
+		color:white;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+	
+	.checkBox {
+		width:5%;
+		color:black;
+		text-align:center;
+		font-size:14px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		background-color:black; 
+	}
+	
+</style>
+
+</head>
+<body>
+<f:view id="resultsPaneView">
+<h:form if="resultsPaneForm">
+
+<div >
+
+	<h:panelGrid id="usersHeader" 
+					 columns="2" 
+					 styleClass="usersHeader" 
+					 columnClasses="searchResults" 
+					 rendered="#{termController.render}" >
+		
+		<h:column>
+			<h:panelGrid><h:outputText value="Search Results" /></h:panelGrid>
+		</h:column>
+		<h:column>
+			<h:panelGrid columns="2" class="buttonPane">
+				<h:commandButton id="closePane" 
+		  					  		  value="Close"
+		  					  		  style="width:125px;"		  					  		  
+		  					  		  actionListener="#{termController.closePane}" />			
+				<h:commandButton id="submit" 
+		  					  		  value="Delete Term"		  					  		  
+		  					  		  actionListener="#{termController.delete}" />
+	  		</h:panelGrid>
+		</h:column>
+	</h:panelGrid>
+	 
+
+	<div style="height:200px;width:100%;overflow-x:auto;overflow-y:auto;"  >		
+	<h:panelGrid columns="1" class="dataTableGridPane" rendered="#{termController.render}">
+
+		<h:dataTable id="dataTable" 							  
+						 var="t"		
+						 rows="50" 							 
+						 value="#{termController.listOfObjects}"
+						 headerClass="search-results-header"
+						 columnClasses="familyName,familyName,familyName,familyName,familyName,familyName,familyName">
+
+		    <h:column>
+		    	<f:facet name="header">Name</f:facet>
+		    	#{t.name}
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header" >startDate</f:facet>
+		    	#{t.startDate}
+		    </h:column>
+			 <h:column>
+			 	<f:facet name="header">endDate</f:facet>
+			 	#{t.endDate}
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">enrollStart</f:facet>
+			 	#{t.enrollStart}
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">enrollEnd</f:facet>
+			 	#{t.enrollEnd}
+			 </h:column>
+			 <h:column>
+			 	<f:facet name="header">dropDeadline</f:facet>
+			 	#{t.dropDeadline}
+			 </h:column>
+		   
+			 <h:column>
+			 	<f:facet name="header">Delete</f:facet>
+			 	<h:selectBooleanCheckbox id="checked" value="#{termController.selectedObjects[t.name]}" />
+			 </h:column>
+			 
+		</h:dataTable>
+			
+	</h:panelGrid>
+	</div>
+</div>
+
+</h:form>
+</f:view>
+</body>
+</html>

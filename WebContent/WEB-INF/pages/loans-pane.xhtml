@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head >	
+<style>
+
+	.dataTablePanelGrid {
+		width:100%;
+		font-size:12px;
+		text-align:center;
+		vertical-align:top;
+		background-color:transparent; 
+	}
+	
+	.checkedOutItems {
+		width:50%;
+		vertical-align:top;
+	}
+	
+	.submitButton {
+		width:50%;
+		text-align:right;
+		vertical-align:top;
+	}
+	
+	.loansHeader {
+		width:80%;
+		height:25px;
+		color:white;
+		text-align:right;
+		font-size:24px;
+		font-weight:strong;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;		
+	}
+
+	.search-results-header {
+		text-align:center;
+		background-color:#999966;
+		border-bottom:1px solid #BBBBBB;
+		padding:12px;
+		font-size:12px;
+		font-weight:bold;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;			
+	}
+	
+	.isbn {
+  		width: 10%;
+  		color:white;
+  		background-color:black;
+  		text-align:center; 
+	}
+	
+	.itemnumber {
+  		width: 3%;
+  		color:white;
+  		background-color:black;
+  		text-align:center; 
+	}
+
+	.authors {
+  		width: 20%;
+  		color:white;
+  		background-color:black;  		
+  		text-align:left;  
+	}
+
+	.titles {
+  		width: 32%;
+  		color:white;
+  		background-color:black;  		
+  		text-align:left; 
+	}
+
+	.dateField {
+  		width: 10%;
+  		color:white;
+  		background-color:black;  		
+  		text-align:center; 
+	}
+
+	.renewals {
+  		width: 5%;
+  		color:white;
+  		background-color:black;  		
+  		text-align:center; 
+	}
+	
+	.checkBoxColumn {
+  		background-color:black;	
+	  	width: 5%;
+	  	color:white;
+	  	text-align:center; 
+	}
+				
+</style>
+
+</h:head>
+
+
+<body>
+<center>
+
+<f:subview id="loansPage">
+<h:form id="loanForm" rendered="true" >
+
+	<h:panelGrid id="loansHeader" columns="2" styleClass="loansHeader" columnClasses="checkedOutItems, submitButton">
+		<h:column>
+			<h:panelGrid><h:outputText value="Current Holdings" /></h:panelGrid>
+		</h:column>
+		<h:column>
+				<h:commandButton id="submit" 
+		  					  		  value="Submit"
+		  					  		  style="width:125px;"
+		  					  		  rendered="#{loanController.render}" 
+		  					  		  actionListener="#{loanController.submit}" />
+		</h:column>
+	</h:panelGrid>
+	 	
+	<div style="width:80%;height:200px;overflow-y:auto;text-align:center;vertical-align:top;">
+ 	
+ 		<h:panelGrid columns="1" class="dataTablePanelGrid" rendered="#{loanController.render}">
+
+		<h:dataTable id="loanTable" 							  
+						 var="l"		
+						 rows="100" 
+						 value="#{loanController.listOfObjects}"
+						 headerClass="search-results-header"
+		    			 columnClasses="isbn, itemnumber, authors, titles, dateField, dateField, renewals, checkBoxColumn, checkBoxColumn">
+						
+			<h:column>
+				<f:facet name="header">ISBN</f:facet>
+				#{l.isbn}
+			</h:column>
+			<h:column>
+				<f:facet name="header">#</f:facet>
+				#{l.itemNumber}
+			</h:column>    
+			<h:column>
+				<f:facet name="header">Author</f:facet>
+				#{l.author}
+			</h:column>
+		   <h:column>
+		   	<f:facet name="header">Title</f:facet>
+		   	#{l.title}
+		   </h:column>
+		   <h:column>
+		   	<f:facet name="header">Date Borrowed</f:facet>
+		   	#{l.dateBorrowed}
+		   </h:column>
+		   <h:column>
+		   	<f:facet name="header">Due Date</f:facet>
+		   	#{l.dueDate}
+		   </h:column>
+	      <h:column>
+	      	<f:facet name="header">Renewals</f:facet>
+	      	#{l.numOfRenewals}
+	      </h:column>
+			<h:column>
+				<f:facet name="header">Renew</f:facet>
+				<h:selectBooleanCheckbox id="renewals" value="#{loanController.renewals[l.loanId]}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Return</f:facet>
+				<h:selectBooleanCheckbox id="returns" value="#{loanController.returns[l.loanId]}" />
+			</h:column>
+
+		</h:dataTable>
+		
+	</h:panelGrid>
+
+	</div>
+	
+</h:form>
+</f:subview>
+
+</center>
+</body>
+
+</html>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"		
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>	
+  	
+  	<style>
+
+		.parentPane {
+			width:100%;
+			text-align:left;
+			vertical-align:top;
+			cellpadding:5;
+			cellspacing:1;
+		}
+		
+		.titlePane {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:0.6;
+		}
+	
+		.titlePane:hover {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:1.0;
+		}
+		
+		.buttonPane {
+			width:100%;
+			height:25px;
+			text-align:right;
+			cellpadding:5;
+			cellspacing:1;	   
+		}
+	  		
+	  	.first {
+  			width:25%;
+  		}		 	
+  		
+  		.second {
+  			width:75%;
+  		}
+ 
+		.errorMessagePane {
+			width:100%;
+			color:red;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid red;
+			background-color:black;
+		}
+		
+		.successMessagePane {
+			width:100%;
+			color:green;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid green;
+			background-color:black;
+		}
+		
+		.resultsHeader {
+			width:100%;
+			align: left;
+			text-align:left;
+			height:25px;
+			color:white;
+			vertical-align:top;
+			font-size:24px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color: #999966;
+			border:2px solid black;		
+		}	
+  		
+  		
+  	</style>
+</head>
+
+<body>
+<center>
+
+<f:view id="maintainTitleView">
+<h:form id="maintainTitleForm">
+
+	<div style="width:100%;text-align:left;">
+		<h:panelGrid id="resultsHeader" 
+						 columns="1" 
+						 rendered="true" >	
+			<h:column>
+				<h:panelGrid class="resultsHeader">
+					<h:outputText value="Maintain Titles" />
+				</h:panelGrid>
+			</h:column>
+		</h:panelGrid>
+	</div>
+
+	<h:panelGrid id="messagePane" columns="1" class="errorMessagePane" rendered="#{messages.errorRender}">
+		<ui:repeat value="#{messages.errorMessages}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+	
+	<h:panelGrid id="successMessagePane" columns="1" class="successMessagePane" rendered="#{messages.confirmRender}">
+		<ui:repeat value="#{messages.confirmations}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+
+	<h:panelGrid id="parentPane" columns="1" class="parentPane" rendered="true">
+		<h:panelGrid id="G1" columns="2" class="titlePane" rendered="true">	
+		
+			<h:column id="titleISBN" class="first"  >
+				<h:outputText value="ISBN" />
+			</h:column>
+			
+			<h:column id="cTitleISBN" class="second"  >
+				<h:inputText id="ISBN" style="width:50%" value="#{titleController.bean.isbn}" validator="#{messages.validateISBN}" />	
+			</h:column>
+			
+			<h:column id="titleTitle" class="fist" >
+				<h:outputText value="Title" />
+			</h:column>
+			
+			<h:column id="cTitleTitle" class="second"  >
+				<h:inputText style="width:50%" value="#{titleController.bean.title}" />	
+			</h:column>
+			
+			<h:column id="titleAuthor" class="first" >
+				<h:outputText value="Author" />		
+			</h:column>
+						
+			<h:column id="cTitleAuthor" class="second">
+				<h:selectOneMenu style="width:50%" value="#{titleController.bean.authorId}">
+					<f:selectItems value="#{cacheManager.listOfAuthors}" var="a" itemLabel="#{a.value}" itemValue="#{a.key}"/>
+				</h:selectOneMenu>
+			</h:column>			
+			
+			<h:column id="titlePublisher" class="first" >
+				<h:outputText value="Publisher" />		
+			</h:column>
+		
+			<h:column id="cTitlePublisher" class="second">
+				<h:selectOneMenu style="width:50%" value="#{titleController.bean.publisherId}">
+					<f:selectItems value="#{cacheManager.listOfPublishers}" var="p" itemLabel="#{p.value}" itemValue="#{p.key}"/>
+				</h:selectOneMenu>
+			</h:column>
+			
+
+		</h:panelGrid>
+		
+		<h:panelGrid  id="G2" columns="1" styleClass="buttonPane">								  
+			<h:column >
+				<h:commandButton id="clearTitles" 
+		    					 value="Clear"
+		    					 style="width:125px" 					  
+		    					 action="#{titleController.clear}" />	
+			   	<h:commandButton id="findAvailableItems" 
+		    					 value="Search"
+		    					 style="width:125px" 		     					  
+		    					 actionListener="#{titleController.submit}" />
+				<h:commandButton id="createTitle" 
+					     		 value="Create Title"
+					     		 style="width:125px" 		     					  
+					     		 actionListener="#{titleController.create}" />
+			</h:column>
+	</h:panelGrid>
+		
+	</h:panelGrid>
+	
+</h:form>
+</f:view>
+
+</center>
+</body>
+</html>

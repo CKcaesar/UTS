@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+          
+<html xmlns="http://www.w3.org/1999/xhtml"
+    	xmlns:ui="http://java.sun.com/jsf/facelets"
+    	xmlns:h="http://java.sun.com/jsf/html"
+    	xmlns:f="http://java.sun.com/jsf/core">
+   
+<f:loadBundle basename="resources.application" var="msg"/>
+      
+<h:head>
+
+	<title><h:outputText value="#{msg.loginTitle}" /></title>
+
+
+<style>
+
+	html, body {
+		height:100%;
+		display:box;
+		background-size:100% 100%;
+		flex-pack:center;
+		flex-align:center;
+		background-repeat:no-repeat;
+	}
+	
+	#wrap {
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		position:absolute;
+		text-align:center;
+		vertical-align:middle;
+	}
+		
+	#header {
+		position:absolute;
+		top:0;
+		left:0;
+		right:0;
+		background:color:purple;
+		z-index:2;
+	}
+	
+	#footer {
+		position:absolute;
+		bottom:0;
+		left:0;
+		right:0;
+		z-index:3;
+	}
+	
+	#whateveryouwant {
+		z-index:1;
+	}
+
+</style>  	
+
+</h:head>
+
+<body>
+<center>
+
+<div id="wrap">	 
+
+	<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+	
+	<div id="header">
+		<ui:insert id="main-header" name="header">
+			<ui:include src="/WEB-INF/templates/main-header.xhtml"/>
+   		</ui:insert>
+   	</div>
+
+	<div id="whateveryouwant">
+	<ui:insert name="content">
+	</ui:insert>
+	</div>
+	
+	<div id="footer">
+		<ui:insert id="main-footer" name="footer">
+			<ui:include src="/WEB-INF/templates/main-footer.xhtml"/>
+   		</ui:insert>
+	</div>
+
+</div>
+</center>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+
+<style>
+
+	.navPane {
+		width:100%";
+		height:100%;
+		text-align:center;
+		vertical-align:top;
+		background-color:transparent;
+	}
+
+	.paneButton {
+		width:170px;
+		height:50px;
+		background-color:#999966;
+		border:2px solid black;
+		font-size:13px;
+		font-weight:strong;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		opacity:0.6;
+	}
+
+	.paneButton:hover {
+		width:170px;
+		height:50px;
+		background-color:#999966;
+		border:2px solid black;
+		font-size:13px;
+		font-weight:strong;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+		opacity:1.0;
+	}
+
+	.gridPane {
+		width:100%;
+		min-height:100%;
+		cellpadding:5;
+		cellspacing:1;
+	   background-color:transparent"
+	}
+	
+</style>
+
+</head>
+
+<body>
+<f:view id="navPaneView">
+<h:form if="navPaneForm">
+
+<div class="navPane">
+
+	<h:panelGrid columns="1" styleClass="gridPane" rendered="true">
+		
+		<h:column styleClass="paneButton">
+			<p style="width:100%;height:20px;" />
+		</h:column>
+		<h:commandButton id="changetime" value="changetime"  title = "changetime"  style="width:50px;" actionListener="#{timecon.changetime}"/>
+		<h:inputText id="time" style="text-align:left;width:130px" value="#{timecon.set}" />
+		<h:outputText id="time1" style="text-align:left;width:130px" value="#{timecon.currenttime}" />
+		<h:column>								  
+			<h:commandButton id="maintainTerms" 
+								  title = "maintainTerms" 
+								  value="Maintain Terms"
+								  styleClass="paneButton" 
+								  actionListener="#{backingBean.setAction}" />
+		</h:column>					  
+		
+		<h:column>	
+			<h:commandButton id="maintainCourses" 
+								  title = "maintainCourses" 
+								  value="Maintain Courses" 
+								  styleClass="paneButton" 
+								  actionListener="#{backingBean.setAction}"/>
+		</h:column>
+		
+		<h:column>	
+			<h:commandButton id="maintainAssignments" 
+								  title = "maintainAssignments" 
+								  value="Maintain Assignments" 
+								  styleClass="paneButton" 
+								  actionListener="#{backingBean.setAction}"/>
+		</h:column>
+				<h:column>	
+			<h:commandButton id="gradingAssignments" 
+								  title = "gradingAssignments" 
+								  value="Grading Assignments" 
+								  styleClass="paneButton" 
+								  actionListener="#{backingBean.setAction}"/>
+		</h:column>
+		 
+	  	<h:column>
+		  	<h:commandButton id="logOut" 
+								  title = "logOut" 
+								  value="Log Out"
+								  styleClass="paneButton"
+								  action="#{backingBean.logOut}"/>
+	  	</h:column>
+	  	
+	</h:panelGrid>
+</div>
+
+</h:form>
+</f:view>
+</body>
+</html>

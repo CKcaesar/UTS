@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+
+<style>
+
+	.table {		
+		min-width:100%;
+		min-height:100%;
+		cellpadding:5;
+		cellspacing:1;
+	}
+
+	#main {
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		position:absolute;
+		text-align:center;
+		vertical-align:middle;
+	}
+	
+	.c1L {
+		width:130px;
+		text-align:left;"
+	    font-size:18px;
+		font-weight:strong;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+	}
+	
+	.c1R {
+		width:130px;
+		text-align:right;"
+	    font-size:18px;
+		font-weight:strong;
+		font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+	}
+	
+</style>
+</head>
+
+<body>
+<f:view>
+
+<h:form rendered="true" id="loginForm">
+	
+<div id="main">
+
+	<table class="table">
+		<tr>
+			<td style="width:27%;background-color:white" />
+			<td style="text-align:center;
+					   vertical-align:middle;
+					   line-height:25px;
+			 		   background-size: 100% 100%;
+					   background-image:url('http://127.0.0.1:8080/WebApp4/images/sandy.jpg');
+					   background-repeat:no-repeat;
+					   background-color:transparent;">
+				
+         	<h1>Welcome to the online University Tracking System</h1>
+         	<h2>Please Login</h2>
+ 
+      		<p style="min-height:150px;background-color:transparent;" />
+      		
+ 				<div style="text-align:center">
+ 				
+					<table style="width:100%;border-collapse:collapse;">
+
+	   				<tr>
+	   				
+	   					<td rowspan="4" style="width:25%;">&nbsp;</td>
+		   				<td class="c1L">
+		           			<h:outputText value="User Name"  />
+		            	</td>
+		            	<td style="width:130px;text-align:right">
+		            		<h:inputText id="stuNo" style="text-align:left;width:130px" value="#{loginManager.stuNo}" />
+		            	</td>
+		            	<td rowspan="4" style="width:26%;">&nbsp;</td>	            	
+	            	
+	            	</tr>
+						            	
+	            	<tr>	            		
+	            		<td class="c1L">
+	            			<h:outputText value="Password" />
+	            		</td>
+	            		<td style="width:130px;text-align:right">
+	            			<h:inputSecret id="password" value="#{loginManager.password}" style="text-align:left;width:130px"/>
+	            		</td>
+	            	</tr>
+
+	            	<tr>
+	            		<td colspan="2" style="text-align:center;text-weight:strong;text-size:18px;color:red;height:25px">	            			
+	            			<h:outputText value="#{loginManager.message}" rendered="true"   />
+	            		</td>
+	            	</tr>
+				
+	            	<tr>	       
+	            	   <h:message for="confirmPassword" style="color: red;" />  		
+	            		<td colspan="2" style="width:260px;text-align:right;vertical-align:middle;">
+	         				<h:commandButton id="confirmRegister" value="register" style="width:130px;" action="#{loginManager.register}" />
+	         				<h:commandButton id="confirmPassword" value="Login" style="width:130px;" action="#{loginManager.login}" />   		
+	            		</td>
+					</tr>            
+	            	
+	            </table>
+	            		
+            </div>
+                            
+			</td>
+			
+			<td style="width:27%;background-color:transparent" />
+		</tr>
+		
+	</table>
+ </div>
+ 
+</h:form>
+</f:view>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">		
+
+<h:head >	
+  	
+  	<style>
+  	
+  		.returnButton {
+  			width:125px;
+  			color:black;
+  			background-color:#C0C0C0;
+  		}
+		
+		.returnButton:hover {
+  			width:125px:
+  			color:yellow;
+  			background-color:#999966;
+  		}
+
+		.button {
+ 			width:125px;
+  			color:black;
+  			background-color:#C0C0C0;		
+		}		
+		
+		.button:hover {
+ 			width:125px;
+  			color:white;
+  			background-color:330033;		
+		}		
+		
+		.accountHeader {
+			width:80%;
+  			color:black;
+  			font-strength:bold;
+  			text-align:right;
+  			font-size:20px;
+  			background-color:#999966;
+  			opacity:0.6;
+  		}
+  		
+  		.accountHeader:hover {
+			width:80%;
+  			color:black;
+  			font-strength:bold;
+  			text-align:right;
+  			font-size:20px;
+  			background-color:#999955;
+  			opacity:1.0;
+  		}
+  		
+  		.parentPane {
+			width:80%;
+			text-align:left;
+			vertical-align:top;
+			cellpadding:5;
+			cellspacing:1;
+		}
+		
+		.titlePane {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+			opacity:0.6;
+		}
+		
+		.titlePane:hover {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999944;
+			opacity:1.0;
+		}
+		
+		.buttonPane {
+			width:80%;
+			height:25px;
+			text-align:right;
+			cellpadding:5;
+			cellspacing:1;	   
+		}
+		
+		.logOutPane {
+			width:80%;
+			height:25px;
+			text-align:right;
+			cellpadding:5;
+			cellspacing:1;	   
+		}
+		
+		.resultsPane {
+			width:100%;
+			height:25px;
+			color:black;
+			text-align:left;
+			vertical-align:top;
+			font-size:16px;
+			font-weight:bold;
+			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+			background-color:#999966;
+		}
+
+		.errorMessagePane {
+			width:80%;
+			color:red;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid red;
+			background-color:black;
+		}
+		
+		.successMessagePane {
+			width:80%;
+			color:green;
+			height:25px;
+			font-size:16px;
+			text-align:center;
+			border:2px solid green;
+			background-color:black;
+		}
+		
+  		.onHand {
+  			width:5%;
+  			color:white;
+  			text-align:center;
+  			vertical-align:middle;
+  			font-size:14px;
+  			font-weight:bold;
+  			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+  			background-color:black; 
+  		}		 	
+  		
+  		.isbn {
+  			width:15%;
+  			color:white;
+  			font-size:14px;
+  			font-weight:bold;
+  			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+  			background-color:black; 
+  		}		 	
+  		
+  		.author {
+  			width:25%;
+  			color:white;
+  			font-size:14px;
+  			font-weight:bold;
+  			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+  			background-color:black; 
+  		}
+  		
+  		.title {
+  			width:50%;
+  			color:white;
+  			font-size:14px;
+  			font-weight:bold;
+  			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+  			background-color:black; 
+  		}
+
+  		.checkBox {
+  			width:5%;
+  			color:black;
+  			text-align:center;
+  			font-size:12px;
+  			font-weight:bold;
+  			font-style:"Arial Verdana", Arial, Helvetica, sans-serif;
+  			background-color:black; 
+  		}
+  			
+		.title-table-header {
+			overflow: scroll;
+			border:1px solid black;
+			padding:16px;
+	   		height:20px;
+		}
+	
+  	   .c25 {
+  			width:25%;
+  		}
+ 
+  	   .c50 {
+  			width:50%;
+  		}
+  		
+  		.c75 {
+  			width:75%;
+  		}
+  				 	
+  	</style>
+</h:head>
+
+<body>
+<center>
+
+<f:subview id="checkOutItemsView">
+<h:form id="checkOutItemsForm">
+
+	<h:panelGrid id="messagePane" columns="1" class="errorMessagePane" rendered="#{messages.errorRender}">
+		<ui:repeat value="#{messages.errorMessages}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+	
+	<h:panelGrid id="successMessagePane" columns="1" class="successMessagePane" rendered="#{messages.confirmRender}">
+		<ui:repeat value="#{messages.confirmations}" var="value">
+			#{value} <br />
+		</ui:repeat>
+	</h:panelGrid>
+
+	<h:panelGrid id="logOutPane" columns="1" class="logOutPane" rendered="true" >
+		<h:commandButton 	id="logOut" 
+								title = "logOut" 
+								value="Log Out"
+								action="#{backingBean.logOut}"/>
+	</h:panelGrid>
+
+	<h:panelGrid id="accountPane" columns="2" rendered="true" class="accountHeader" columnClasses="c75, c25" >
+		<h:column>
+				<h:outputText value="&#160;&#160;" />
+		</h:column>
+		<h:column>
+			<h:outputText value="Account Standing:" />
+			<h:outputText value="&#160;&#160;" />
+			<h:outputText value="#{loanController.outstandingBalance}" />
+		</h:column>	
+
+		<h:column>
+				<h:outputText value="&#160;&#160;" />
+		</h:column>		
+		<h:column>
+     		<h:inputText id="Payment" style="text-align:right;width:50px" value="#{loanController.payment}"  validator="#{messages.validatePayment}" />
+     		<h:outputText value="&#160;&#160;" />	
+     		<h:commandButton id="makePayment" 
+		     					  value="Make Payment"
+		     					  style="width:125px" 		     					  
+		     					  action="#{loanController.makePayment}" />
+		</h:column>	
+	</h:panelGrid>
+
+	<h:panelGrid id="mainPane" class="parentPane" rendered="true">
+	
+		<h:panelGrid id="findTitles" columns="3" class="titlePane" rendered="true" columnClasses="c25, c25, c50">	
+		
+			<h:column id="isbn">
+				<h:outputText value="ISBN" />
+			</h:column>
+			
+			<h:column id="author" >
+				<h:outputText value="Author" />
+			</h:column>
+			
+			<h:column id="title" >
+				<h:outputText value="Title" />
+			</h:column>
+	
+			<h:column id="cIsbn" >
+				<h:inputText id="ISBN" style="width:95%" value="#{titleController.bean.isbn}"  validator="#{messages.validateISBN}" />	
+			</h:column>
+		
+			<h:column id="cAuthor" >
+				<h:inputText id="Author" style="width:95%" value="#{titleController.bean.author}"  validator="#{messages.validateName}" />	
+			</h:column>
+			
+			<h:column id="cTitle">
+				<h:inputText style="width:98%" value="#{titleController.bean.title}" />	
+			</h:column>
+	
+		</h:panelGrid>
+			
+		<h:panelGrid id="submitQuery" columns="1" style="width:100%;text-align:right">	
+			<h:column>
+				<h:commandButton id="clearItems" 
+							        value="Clear" 
+							        class="button"
+								     actionListener="#{titleController.clear}" />
+				<h:commandButton id="memberFindTitles" 
+								     value="Submit" 
+								     class="button"
+								     actionListener="#{titleController.submit}" />
+				<h:commandButton id="returnToSender" 
+							        value="Return" 
+							        class="returnButton"
+							        rendered="#{librarian}"	        
+								 	  action="#{titleController.returnToSender}" />								     			  
+			</h:column>			
+		</h:panelGrid>
+	
+		<hr style="width:100%" />
+		
+	</h:panelGrid>
+
+
+			
+	<div style="max-height:200px;width:80%;overflow-x:auto;overflow-y:auto;"  >
+	
+	
+		
+		<h:panelGrid columns="1" class="resultsPane" rendered="#{titleController.render}">
+		
+			<h:dataTable id="titlesTable" 						  
+							 var="t"		
+							 rows="50" 							 
+							 value="#{titleController.listOfObjects}"
+							 rendered="#{titleController.render}"
+							 columnClasses="onHand,isbn,author,title,checkBox">
+	
+			    <h:column>
+			    	<f:facet name="header">#</f:facet>	
+			    	#{t.onHand}
+			    </h:column>
+				 <h:column>
+				 	<f:facet name="header">ISBN</f:facet>	
+				 	#{t.isbn}
+				 </h:column>
+				 <h:column>
+				 	<f:facet name="header">Author</f:facet>
+				 	#{t.author}
+				 </h:column>					    
+				 <h:column>
+				 	<f:facet name="header">Title</f:facet>
+				 	#{t.title}
+				 </h:column>
+			   
+				 <h:column>
+				 	<f:facet name="header" >Check Out</f:facet>		
+				 		<h:selectBooleanCheckbox id="checked" value="#{titleController.selectedObjects[t.isbn]}" />
+				 </h:column>
+				 
+			</h:dataTable>
+				
+		</h:panelGrid>
+	</div>
+	
+	<h:panelGrid columns="1"  styleClass="buttonPane" rendered="#{titleController.render}">
+		<h:column>	
+	   <h:commandButton id="clearDisplay" 
+	     					  value="Close Panel" 
+	     					  actionListener="#{titleController.clear}" />
+		<h:commandButton id="selectTitles" 
+							  title = "selectTitles" 
+							  value="Check Out" 
+							  action="#{titleController.checkOutItems}" />
+		</h:column>
+		
+		<hr style="width:100%" />
+	</h:panelGrid>
+		
+
+
+</h:form>
+</f:subview>
+
+</center>
+</body>
+</html>

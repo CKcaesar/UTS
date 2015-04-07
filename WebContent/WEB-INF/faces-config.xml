@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+
+	<application>
+		<message-bundle>resources.application</message-bundle>
+		<locale-config>
+			<default-locale>en</default-locale>
+		</locale-config>
+	</application>
+	
+	<managed-bean>
+		<managed-bean-name>messages</managed-bean-name>
+		<managed-bean-class>edu.scs.carleton.comp.ls.view.utils.Message</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>					
+	
+	<navigation-rule>
+		<display-name>welcome.xhtml</display-name>
+		<from-view-id>/welcome.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{loginManager.login}</from-action>
+			<from-outcome>public-member</from-outcome>
+			<to-view-id>/common-form.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{loginManager.login}</from-action>
+			<from-outcome>librarian</from-outcome>
+			<to-view-id>/librarian-form.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{loginManager.register}</from-action>
+			<from-outcome>newcomer</from-outcome>
+			<to-view-id>/register-form.xhtml</to-view-id>
+		</navigation-case>					
+		<navigation-case>
+			<from-action>#{loginManager.login}</from-action>
+			<from-outcome>fail</from-outcome>
+			<to-view-id>/welcome.xhtml</to-view-id>
+		</navigation-case>	
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>common-form.xhtml</display-name>
+		<from-view-id>/common-form.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{titleController.checkOutItems}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/common-form.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>librarian-form.xhtml</display-name>
+		<from-view-id>/librarian-form.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{backingBean.changeApplication}</from-action>
+			<from-outcome>changeApplication</from-outcome>
+			<to-view-id>/common-form.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<display-name>common-form.xhtml</display-name>
+		<from-view-id>/common-form.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{titleController.returnToSender}</from-action>
+			<from-outcome>returnToSender</from-outcome>
+			<to-view-id>/librarian-form.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>librarian-form.xhtml</display-name>
+		<from-view-id>/librarian-form.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{backingBean.logOut}</from-action>
+			<from-outcome>loggedOut</from-outcome>
+			<to-view-id>/welcome.xhtml</to-view-id>
+		</navigation-case>		
+	</navigation-rule>	
+		<navigation-rule>
+		<display-name>common-form.xhtml</display-name>
+		<from-view-id>/common-form.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{backingBean.logOut}</from-action>
+			<from-outcome>loggedOut</from-outcome>
+			<to-view-id>/welcome.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+		<navigation-rule>
+		<display-name>register-form.xhtml</display-name>
+		<from-view-id>/register-form.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{backingBean.logOut}</from-action>
+			<from-outcome>loggedOut</from-outcome>
+			<to-view-id>/welcome.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+		
+</faces-config>
